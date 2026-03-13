@@ -1,0 +1,54 @@
+{
+  "entities": {
+    "Project": {
+      "title": "Project",
+      "description": "A portfolio project entry",
+      "type": "object",
+      "properties": {
+        "title": { "type": "string", "description": "Project title" },
+        "category": { "type": "string", "description": "Project category" },
+        "year": { "type": "string", "description": "Year of completion" },
+        "location": { "type": "string", "description": "Project location" },
+        "description": { "type": "string", "description": "Detailed description" },
+        "imageUrl": { "type": "string", "description": "Primary project image" },
+        "gallery": {
+          "type": "array",
+          "items": { "type": "string" },
+          "description": "Additional gallery images"
+        },
+        "stats": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "label": { "type": "string" },
+              "value": { "type": "string" }
+            }
+          }
+        },
+        "order": { "type": "number", "description": "Display order" }
+      },
+      "required": ["title", "category", "year", "imageUrl"]
+    },
+    "Settings": {
+      "title": "Settings",
+      "description": "Global site settings",
+      "type": "object",
+      "properties": {
+        "philosophyTitle": { "type": "string" },
+        "philosophyDescription": { "type": "string" },
+        "contactEmail": { "type": "string" }
+      }
+    }
+  },
+  "firestore": {
+    "/projects": {
+      "schema": "Project",
+      "description": "Collection of portfolio projects"
+    },
+    "/settings": {
+      "schema": "Settings",
+      "description": "Global site configuration"
+    }
+  }
+}
