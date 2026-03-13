@@ -1,7 +1,15 @@
-import React from 'react';
-import { motion } from 'motion/react';
+import { useEffect, useState } from 'react';
+import { motion } from 'framer-motion';
+import { SiteSettings, subscribeToSettings } from '../services/settingsService';
 
 export const Navbar = () => {
+  const [settings, setSettings] = useState<SiteSettings | null>(null);
+
+  useEffect(() => {
+    const unsubscribe = subscribeToSettings(setSettings);
+    return () => unsubscribe();
+  }, []);
+
   return (
     <nav className="fixed top-0 left-0 w-full z-50 mix-blend-difference">
       <div className="max-w-[1440px] mx-auto px-6 md:px-12 h-24 flex items-center justify-between">
@@ -10,7 +18,9 @@ export const Navbar = () => {
           animate={{ opacity: 1 }}
           className="font-serif text-2xl tracking-tighter text-white"
         >
-          Vikram Malhotra
+          {settings?.heroTitle1 && settings?.heroTitle2 
+            ? `${settings.heroTitle1} ${settings.heroTitle2}`
+            : 'Vikram Malhotra'}
         </motion.div>
 
         <div className="hidden md:flex items-center gap-12">

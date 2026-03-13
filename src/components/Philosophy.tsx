@@ -1,7 +1,17 @@
-import { motion } from 'motion/react';
-import { PHILOSOPHY } from '../constants';
+import { useEffect, useState } from 'react';
+import { motion } from 'framer-motion';
+import { SiteSettings, subscribeToSettings } from '../services/settingsService';
 
 export const Philosophy = () => {
+  const [settings, setSettings] = useState<SiteSettings | null>(null);
+
+  useEffect(() => {
+    const unsubscribe = subscribeToSettings(setSettings);
+    return () => unsubscribe();
+  }, []);
+
+  if (!settings) return null;
+
   return (
     <section id="about" className="relative overflow-hidden bg-brand-dark">
       <div className="section-container">
@@ -12,9 +22,11 @@ export const Philosophy = () => {
             viewport={{ once: true }}
             transition={{ duration: 1 }}
           >
-            <span className="font-mono text-[10px] uppercase tracking-[0.5em] text-brand-accent mb-12 block">Philosophy</span>
+            <span className="font-mono text-[10px] uppercase tracking-[0.5em] text-brand-accent mb-12 block">
+              {settings.philosophySubtitle || 'Philosophy'}
+            </span>
             <h2 className="text-6xl md:text-8xl font-light tracking-tighter leading-[0.9] mb-16">
-              {PHILOSOPHY.title.split(' ').map((word, i) => (
+              {(settings.philosophyTitle || 'FORM FOLLOWS FEELING').split(' ').map((word, i) => (
                 <span key={i} className={i % 2 === 1 ? 'italic font-normal' : ''}>
                   {word}{' '}
                 </span>
@@ -22,7 +34,7 @@ export const Philosophy = () => {
             </h2>
             <div className="max-w-md">
               <p className="text-white/40 text-xl leading-relaxed font-serif italic mb-12">
-                {PHILOSOPHY.description}
+                {settings.philosophyDescription || 'Architecture is not just about space; it is about the emotional resonance of the structures we inhabit.'}
               </p>
               <div className="flex items-center gap-6">
                 <div className="w-16 h-px bg-brand-accent" />

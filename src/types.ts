@@ -5,10 +5,15 @@ export interface Project {
   year: string;
   location: string;
   description: string;
+  concept?: string;
+  materials?: string;
+  execution?: string;
   imageUrl: string;
   gallery?: string[];
   stats?: { label: string; value: string }[];
   order?: number;
+  buttonText?: string;
+  buttonLink?: string;
 }
 
 export interface Award {

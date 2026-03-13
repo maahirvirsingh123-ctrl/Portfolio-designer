@@ -10,6 +10,9 @@
         "year": { "type": "string", "description": "Year of completion" },
         "location": { "type": "string", "description": "Project location" },
         "description": { "type": "string", "description": "Detailed description" },
+        "concept": { "type": "string", "description": "The design concept" },
+        "materials": { "type": "string", "description": "Materials used" },
+        "execution": { "type": "string", "description": "Execution details" },
         "imageUrl": { "type": "string", "description": "Primary project image" },
         "gallery": {
           "type": "array",
@@ -26,7 +29,9 @@
             }
           }
         },
-        "order": { "type": "number", "description": "Display order" }
+        "order": { "type": "number", "description": "Display order" },
+        "buttonText": { "type": "string", "description": "Custom text for the project button" },
+        "buttonLink": { "type": "string", "description": "Custom link for the project button (optional)" }
       },
       "required": ["title", "category", "year", "imageUrl"]
     },
@@ -35,9 +40,69 @@
       "description": "Global site settings",
       "type": "object",
       "properties": {
+        "heroTitle1": { "type": "string" },
+        "heroTitle2": { "type": "string" },
+        "heroSubtitle": { "type": "string" },
+        "heroLocation": { "type": "string" },
+        "heroVerticalText": { "type": "string" },
+        "heroImageUrl": { "type": "string" },
         "philosophyTitle": { "type": "string" },
+        "philosophySubtitle": { "type": "string" },
         "philosophyDescription": { "type": "string" },
-        "contactEmail": { "type": "string" }
+        "processTitle": { "type": "string" },
+        "processSubtitle": { "type": "string" },
+        "recognitionTitle": { "type": "string" },
+        "recognitionSubtitle": { "type": "string" },
+        "contactEmail": { "type": "string" },
+        "contactPhone": { "type": "string" },
+        "contactAddress": { "type": "string" },
+        "processSteps": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "number": { "type": "string" },
+              "title": { "type": "string" },
+              "description": { "type": "string" }
+            }
+          }
+        },
+        "awards": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "year": { "type": "string" },
+              "title": { "type": "string" },
+              "organization": { "type": "string" }
+            }
+          }
+        },
+        "testimonials": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "name": { "type": "string" },
+              "role": { "type": "string" },
+              "company": { "type": "string" },
+              "content": { "type": "string" }
+            }
+          }
+        },
+        "materialsTitle": { "type": "string" },
+        "materialsDescription": { "type": "string" },
+        "materialsItems": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "title": { "type": "string" },
+              "description": { "type": "string" },
+              "imageUrl": { "type": "string" }
+            }
+          }
+        }
       }
     }
   },

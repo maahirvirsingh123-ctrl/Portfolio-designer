@@ -5,6 +5,7 @@ import { Projects } from './components/Projects';
 import { Philosophy } from './components/Philosophy';
 import { Process } from './components/Process';
 import { Recognition } from './components/Recognition';
+import { MaterialsSection } from './components/MaterialsSection';
 import { Contact } from './components/Contact';
 import { motion, useScroll, useSpring } from 'framer-motion';
 import { AdminDashboard } from './components/AdminDashboard';
@@ -48,6 +49,7 @@ export default function App() {
               <Hero />
               <Philosophy />
               <Projects />
+              <MaterialsSection />
               <Process />
               <Recognition />
               <Contact />

@@ -1,6 +1,17 @@
-import { motion } from 'motion/react';
+import { useEffect, useState } from 'react';
+import { motion } from 'framer-motion';
+import { SiteSettings, subscribeToSettings } from '../services/settingsService';
 
 export const Contact = () => {
+  const [settings, setSettings] = useState<SiteSettings | null>(null);
+
+  useEffect(() => {
+    const unsubscribe = subscribeToSettings(setSettings);
+    return () => unsubscribe();
+  }, []);
+
+  if (!settings) return null;
+
   return (
     <section id="contact" className="bg-brand-dark">
       <div className="section-container">
@@ -19,12 +30,17 @@ export const Contact = () => {
             </p>
             
             <div className="space-y-4">
-              <a href="mailto:v.malhotra@maavisprojects.com" className="block text-4xl md:text-5xl font-light hover:text-brand-accent transition-colors">
-                v.malhotra@maavisprojects.com
+              <a href={`mailto:${settings.contactEmail || 'v.malhotra@maavisprojects.com'}`} className="block text-4xl md:text-5xl font-light hover:text-brand-accent transition-colors break-all">
+                {settings.contactEmail || 'v.malhotra@maavisprojects.com'}
               </a>
               <div className="font-mono text-[10px] uppercase tracking-widest text-white/20">
-                BANGALORE // MUMBAI // DUBAI
+                {settings.contactAddress || 'BANGALORE // MUMBAI // DUBAI'}
               </div>
+              {settings.contactPhone && (
+                <div className="font-mono text-[10px] uppercase tracking-widest text-white/20">
+                  {settings.contactPhone}
+                </div>
+              )}
             </div>
           </div>
 

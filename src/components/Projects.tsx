@@ -65,6 +65,20 @@ export const Projects = () => {
                       </div>
                     ))}
                   </div>
+
+                  <div className="pt-8">
+                    <a 
+                      href={project.buttonLink || '#'} 
+                      target={project.buttonLink?.startsWith('http') ? '_blank' : '_self'}
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center gap-4 group"
+                    >
+                      <span className="text-[10px] font-bold uppercase tracking-[0.4em] text-brand-accent group-hover:translate-x-2 transition-transform duration-500">
+                        {project.buttonText || 'View Project'}
+                      </span>
+                      <div className="h-px w-12 bg-brand-accent/30 group-hover:w-20 transition-all duration-500" />
+                    </a>
+                  </div>
                 </div>
               </div>
 

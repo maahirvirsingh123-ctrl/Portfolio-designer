@@ -1,36 +1,31 @@
-import { motion } from 'motion/react';
-
-const STEPS = [
-  {
-    number: '01',
-    title: 'Discovery',
-    description: 'Site analysis and objective definition.'
-  },
-  {
-    number: '02',
-    title: 'Concept',
-    description: 'Modular and sustainable design ideation.'
-  },
-  {
-    number: '03',
-    title: 'Execution',
-    description: 'Structural precision and project management.'
-  },
-  {
-    number: '04',
-    title: 'Handover',
-    description: 'Final fit-out and infrastructure integration.'
-  }
-];
+import { useEffect, useState } from 'react';
+import { motion } from 'framer-motion';
+import { SiteSettings, subscribeToSettings } from '../services/settingsService';
 
 export const Process = () => {
+  const [settings, setSettings] = useState<SiteSettings | null>(null);
+
+  useEffect(() => {
+    const unsubscribe = subscribeToSettings(setSettings);
+    return () => unsubscribe();
+  }, []);
+
+  if (!settings) return null;
+
+  const steps = settings.processSteps || [
+    { number: '01', title: 'Discovery', description: 'Site analysis and objective definition.' },
+    { number: '02', title: 'Concept', description: 'Modular and sustainable design ideation.' },
+    { number: '03', title: 'Execution', description: 'Structural precision and project management.' },
+    { number: '04', title: 'Handover', description: 'Final fit-out and infrastructure integration.' }
+  ];
+
   return (
     <section className="bg-brand-dark border-t border-white/5">
       <div className="section-container">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12">
-          {STEPS.map((step, index) => (
+          {steps.map((step, index) => (
             <motion.div
-              key={step.number}
+              key={index}
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
